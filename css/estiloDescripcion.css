@@ -1,0 +1,91 @@
+@font-face{
+  font-family: fuenteLibre;
+  src:url(../res/THWACK.TTF);
+}
+
+body{
+    background: url(../img/fonfoMenuInicio.jpeg);
+    font-family: fuenteLibre;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+}
+
+h1{
+    text-align: center;
+    margin-left: 80px;
+}
+
+.Explicacion{
+  font-family: fuenteLibre;
+  background-color: #db3f35;
+  border-style: solid;
+  border-width: 5px;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 450px;
+  border-radius: 15px;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+}
+
+.Controles{
+  font-family: fuenteLibre;
+    background-color: #db3f35;
+    border-style: solid;
+    border-width: 5px;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 900px;
+    border-radius: 15px;
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+}
+
+.VolverMenu{ /*boton de volver al menu principal*/
+  margin-top: 15px;
+  margin-left: 400px;
+  background-color: #db3f35;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #db3f35;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+.segundoImagen{
+  margin-top: -10px;
+  margin-left: -300px;
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #db3f35;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+#primeroTexto{
+  font-family: fuenteLibre;
+    background-color: #db3f35;
+    border-style: solid;
+    border-width: 5px;
+    text-align: center;
+    margin-top: -10px;
+    margin-left: -60px;
+    border-radius: 15px;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+}

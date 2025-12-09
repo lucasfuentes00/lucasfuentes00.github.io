@@ -1,0 +1,61 @@
+/*Esto es el css del menu de inicio*/
+@font-face{
+  font-family: fuenteLibre;
+  src:url(../res/THWACK.TTF);
+}
+
+body,html {
+  margin: 10px;
+  font-family: fuenteLibre;
+  background: url(../img/fonfoMenuInicio.jpeg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-attachment: fixed;
+}
+
+h1{
+text-align: center;
+font-size: 300%
+}
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+a:hover, a:active {
+  background-color: #ff6559;
+}
+
+.Descripcion{
+  margin-top: 40px;
+  margin-left: 80px;
+  font-family: fuenteLibre;
+}
+
+.Autores {
+  margin-top: 40px;
+  margin-left: 140px;
+  font-family: fuenteLibre;
+}
+
+.Multimedia{
+  margin-top: 40px;
+  margin-left: 200px;
+  font-family: fuenteLibre;
+}
+
+.Desarrollo{
+  margin-top: 40px;
+  margin-left: 250px;
+  font-family: fuenteLibre;
+}

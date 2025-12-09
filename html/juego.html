@@ -1,0 +1,53 @@
+<!---      GAME        --->
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="../css/estiloJuego.css">
+    <link rel="icon" type="image/x-icon" href="../img/saxofon.png">
+    <title>Sax Hero</title>
+</head>
+
+<body>
+    <main>
+
+        <div class="title">
+            <h1>Sax Hero</h1>
+        </div>
+
+        <div class="title-score">
+            <h2 id="puntaje">Presiona <kbd>P</kbd> o pulsa el boton para comenzar</h2>
+        </div>
+
+        <div class="canvas_div">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="button-panel">
+            <button id="btnIniciar" class="button-play-pause"></button>
+            <button hidden id="btnPausar" class="button-play-pause"></button>
+            <button id="btnF" class="button-key key1">A</button>
+            <button id="btnS" class="button-key key2">S</button>
+            <button id="btnD" class="button-key key3">D</button>
+            <button id="btnA" class="button-key key4">F</button>
+            <button class="button-danger" id="reset">Reset</button>
+        </div>
+
+        <div class="foot-title">
+            <h3> Presiona P o pulsa el boton para comenzar</h3>
+        </div>
+
+        <div class="VolverMenu">
+        <a href="inicio.html" target="">Volver</a>
+        </div>
+
+        <div class="Progreso">
+          <h4 id="progreso">Aqui se muestra su progreso</h4>
+        </div>
+
+    </main>
+
+    <script type="text/javascript" src="../js/sax.js"></script>
+</body>
+
+
+</html>

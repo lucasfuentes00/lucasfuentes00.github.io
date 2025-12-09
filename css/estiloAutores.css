@@ -1,0 +1,129 @@
+@font-face{
+  font-family: fuenteLibre;
+  src:url(../res/THWACK.TTF);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,html {
+  margin: 10px;
+  font-family: fuenteLibre;
+  background: url(../img/fonfoMenuInicio.jpeg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin-left: 80px;
+}
+
+h2{
+  text-align: center;
+  margin-left: 500px;
+  font-size: 200%;
+}
+
+nav {
+  float: left;
+  width: 30%;
+  height: 400px;
+  padding: 15px;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tablink {
+  background-color: #9999;
+  color: black;
+  float: left;
+  border:white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  padding: 20px;
+  font-size: 20px;
+  width: 25%;
+  margin-right: 0px;
+  font-family: fuenteLibre;
+}
+
+.tablink:hover {
+  background-color: #9999;
+}
+
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 25px 50px;
+  height: 650px;
+  margin-top: 83px;
+}
+
+.VolverMenu{ /*boton de volver al menu principal*/
+  margin-bottom: 100px;
+  margin-left: 50px;
+  margin-top: 10px;
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #ff6559;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+#Persona1 {background-color: #e9d8d2;}
+#Persona2 {background-color: #e9d8d2;}
+#Persona3 {background-color: #e9d8d2;}
+#Persona4 {background-color: #e9d8d2;}
+
+#foto1{
+      width: 80%;
+      height: 100%;
+      border-style: solid;
+      border-width: 5px;
+      border-radius: 15px;
+      border-color: black;
+}
+
+#foto2{
+  width: 80%;
+  height: 100%;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+#foto3{
+  width: 80%;
+  height: 100%;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
+
+#foto4{
+  width: 80%;
+  height: 100%;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: black;
+}
