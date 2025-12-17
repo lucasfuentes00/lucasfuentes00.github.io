@@ -1,112 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Lucas Fuentes – Projects</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root {
-      --bg: #0e0e11;
-      --card: #16161c;
-      --text: #eaeaf0;
-      --muted: #9a9aa6;
-      --accent: #7c8cff;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    header {
-      padding: 4rem 2rem 2rem;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: .5rem;
-    }
-
-    header p {
-      color: var(--muted);
-      max-width: 600px;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    }
-
-    .card h3 {
-      margin: 0 0 .5rem;
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: .95rem;
-      flex-grow: 1;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--muted);
-      font-size: .85rem;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <header>
     <h1>Lucas Fuentes</h1>
     <p>
-      A visual overview of my GitHub projects — audio tools, electronics, music tech
-      and creative development.
+      A visual overview of my GitHub projects — audio tools, electronics,
+      music tech and creative development.
     </p>
   </header>
 
@@ -115,44 +24,10 @@
   </main>
 
   <footer>
-    © 2025 · Powered by GitHub API
+    © 2025 · Automatically updated
   </footer>
 
- <script>
-  const container = document.getElementById("projects");
-
-  fetch("repos.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load repos.json");
-      return res.json();
-    })
-    .then(repos => {
-      repos
-        .filter(repo => !repo.fork)
-        .forEach(repo => {
-          const card = document.createElement("div");
-          card.className = "card";
-
-          card.innerHTML = `
-            <h3>${repo.name}</h3>
-            <p>${repo.description || "No description provided."}</p>
-            <div class="meta">
-              <span>${repo.language || ""}</span>
-              <a href="${repo.html_url}" target="_blank" rel="noopener">
-                View →
-              </a>
-            </div>
-          `;
-
-          container.appendChild(card);
-        });
-    })
-    .catch(err => {
-      console.error(err);
-      container.innerHTML = "<p>Unable to load projects.</p>";
-    });
-</script>
-
-
+  <!-- JS -->
+  <script src="js/projects.js"></script>
 </body>
 </html>
