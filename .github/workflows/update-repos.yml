@@ -1,0 +1,33 @@
+name: Update repos.json
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # every day at 03:00 UTC
+  workflow_dispatch:      # allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch GitHub repositories
+        run: |
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/users/lucasfuentes00/repos?per_page=100&sort=updated" \
+               > repos.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          if git diff --quiet; then
+            echo "No changes"
+          else
+            git add repos.json
+            git commit -m "Auto-update repos.json"
+            git push
+          fi
