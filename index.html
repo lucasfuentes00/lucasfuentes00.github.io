@@ -1,64 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Lucas Fuentes</title>
+  <meta charset="UTF-8" />
+  <title>Lucas Fuentes – Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #0e0e11;
+      --card: #16161c;
+      --text: #eaeaf0;
+      --muted: #9a9aa6;
+      --accent: #7c8cff;
+    }
 
-  <!-- SEO basic -->
-  <meta name="description" content="Personal website of Lucas Fuentes – audio, electronics and creative technology.">
+    * { box-sizing: border-box; }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 4rem 2rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: .5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+
+    .card h3 {
+      margin: 0 0 .5rem;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .95rem;
+      flex-grow: 1;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+  </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
   <header>
     <h1>Lucas Fuentes</h1>
-    <p>Audio · Electronics · Creative Tech</p>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="html/about.html">About</a>
-      <a href="html/projects.html">Projects</a>
-      <a href="html/contact.html">Contact</a>
-    </nav>
+    <p>
+      A visual overview of my GitHub projects — audio tools, electronics, music tech
+      and creative development.
+    </p>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main>
-
-    <section>
-      <h2>Welcome</h2>
-      <p>
-        This website is hosted on <strong>GitHub Pages</strong>.
-        Here I share projects related to audio, electronics, music technology
-        and creative development.
-      </p>
-    </section>
-
-    <section>
-      <h2>Featured Project</h2>
-      <p>
-        MIDI controller experiments, audio tools for Ableton Live,
-        and embedded electronics projects.
-      </p>
-      <a href="html/projects.html">→ View projects</a>
-    </section>
-
+    <section class="projects" id="projects"></section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <p>© 2025 Lucas Fuentes</p>
+    © 2025 · Powered by GitHub API
   </footer>
 
-  <!-- JS -->
-  <script src="js/main.js"></script>
+  <script>
+    const username = "lucasfuentes00"; // change if needed
+    const container = document.getElementById("projects");
+
+    fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
+      .then(res => res.json())
+      .then(repos => {
+        repos
+          .filter(repo => !repo.fork)
+          .forEach(repo => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+              <h3>${repo.name}</h3>
+              <p>${repo.description || "No description provided."}</p>
+              <div class="meta">
+                <span>${repo.language || ""}</span>
+                <a href="${repo.html_url}" target="_blank">View →</a>
+              </div>
+            `;
+
+            container.appendChild(card);
+          });
+      })
+      .catch(() => {
+        container.innerHTML = "<p>Unable to load projects.</p>";
+      });
+  </script>
 
 </body>
 </html>
