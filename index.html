@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lucas Fuentes – Projects</title>
+  <title>Lucas Fuentes | Creative Technologist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://fav.farm/🎹">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
@@ -13,41 +21,50 @@
 
   <nav class="main-nav">
     <div class="nav-content">
-      <a href="#projects">Projects</a>
-      <a href="#shop">Shop</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="shop.html">Shop</a>
     </div>
   </nav>
 
-  <header>
+  <header class="home-header">
     <img id="avatar" src="" alt="Avatar" style="display:none;">
-    <h1 id="name">Lucas Fuentes</h1>
-    <p id="bio">
-      A visual overview of my GitHub projects — audio tools, electronics,
-      music tech and creative development.
-    </p>
+    <h1 class="stylized-title" id="name">Lucas Fuentes</h1>
+    <p class="subtitle" id="bio">Creative Technologist | Audio Engineering & Music Tech</p>
   </header>
 
   <main>
-    <section class="projects-section" id="projects">
-      <h2>GitHub Projects</h2>
-      <div class="projects" id="projects-container"></div>
+    <section class="resume-section">
+      <h2>About Me</h2>
+      <p>
+        I am a passionate developer and audio engineer focused on bridging the gap between technology and music. 
+        My work spans from building custom MIDI controllers and VST plugins to designing innovative electronics 
+        for creative expression.
+      </p>
     </section>
 
-    <section class="shop-section" id="shop">
-      <h2>Online Shop</h2>
-      <p>Download my latest audio tools, plugins, and digital assets.</p>
-      <div class="shop-container">
-        <a class="gumroad-button" href="https://lucasfuentes00.gumroad.com/" target="_blank">Visit My Gumroad Shop</a>
+    <section class="featured-projects" id="featured-projects">
+      <h2>Featured Work</h2>
+      <div class="projects-grid" id="featured-container">
+        <!-- Filled by JS -->
       </div>
+      <div class="view-all">
+        <a href="projects.html" class="btn-primary">View All Projects →</a>
+      </div>
+    </section>
+
+    <section class="home-shop-teaser">
+      <h2>Digital Tools</h2>
+      <p>Explore my curated collection of audio tools and digital assets.</p>
+      <a href="shop.html" class="btn-secondary">Visit the Shop</a>
     </section>
   </main>
 
   <footer>
-    © 2025 · Automatically updated via GitHub Actions
+    <p>© 2025 · Built with passion · <a href="https://github.com/lucasfuentes00" target="_blank">GitHub</a></p>
   </footer>
 
   <!-- JS -->
-  <script src="https://gumroad.com/js/gumroad.js"></script>
-  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

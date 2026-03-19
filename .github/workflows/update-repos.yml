@@ -1,4 +1,4 @@
-name: Update repos.json
+name: Update GitHub Data
 
 on:
   schedule:
@@ -13,17 +13,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch GitHub repositories
-        run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               "https://api.github.com/users/lucasfuentes00/repos?per_page=100&sort=updated" \
-               > repos.json
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      - name: Fetch GitHub profile
-        run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               "https://api.github.com/users/lucasfuentes00" \
-               > profile.json
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run update script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python update_repos.py
 
       - name: Commit and push if changed
         run: |
@@ -34,6 +35,6 @@ jobs:
             echo "No changes"
           else
             git add repos.json profile.json
-            git commit -m "Auto-update GitHub data"
+            git commit -m "Auto-update GitHub data with images"
             git push
           fi
