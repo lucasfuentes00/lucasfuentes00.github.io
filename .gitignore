@@ -1,0 +1,11 @@
+# Local test files
+test/
+update_repos.py
+
+# Data files (they will be updated on GitHub Actions)
+repos.json
+profile.json
+
+# OS files
+.DS_Store
+**/ .DS_Store
