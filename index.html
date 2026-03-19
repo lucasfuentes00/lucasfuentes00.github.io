@@ -11,23 +11,43 @@
 
 <body>
 
+  <nav class="main-nav">
+    <div class="nav-content">
+      <a href="#projects">Projects</a>
+      <a href="#shop">Shop</a>
+    </div>
+  </nav>
+
   <header>
-    <h1>Lucas Fuentes</h1>
-    <p>
+    <img id="avatar" src="" alt="Avatar" style="display:none;">
+    <h1 id="name">Lucas Fuentes</h1>
+    <p id="bio">
       A visual overview of my GitHub projects — audio tools, electronics,
       music tech and creative development.
     </p>
   </header>
 
   <main>
-    <section class="projects" id="projects"></section>
+    <section class="projects-section" id="projects">
+      <h2>GitHub Projects</h2>
+      <div class="projects" id="projects-container"></div>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <h2>Online Shop</h2>
+      <p>Download my latest audio tools, plugins, and digital assets.</p>
+      <div class="shop-container">
+        <a class="gumroad-button" href="https://lucasfuentes00.gumroad.com/" target="_blank">Visit My Gumroad Shop</a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    © 2025 · Automatically updated
+    © 2025 · Automatically updated via GitHub Actions
   </footer>
 
   <!-- JS -->
+  <script src="https://gumroad.com/js/gumroad.js"></script>
   <script src="js/projects.js"></script>
 </body>
 </html>

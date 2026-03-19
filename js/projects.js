@@ -1,11 +1,36 @@
-const container = document.getElementById("projects");
+// Select containers
+const projectsContainer = document.getElementById("projects-container");
+const avatarImg = document.getElementById("avatar");
+const nameHeading = document.getElementById("name");
+const bioPara = document.getElementById("bio");
 
+// Fetch profile data
+fetch("profile.json")
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to load profile.json");
+    return res.json();
+  })
+  .then(profile => {
+    if (profile.name) nameHeading.textContent = profile.name;
+    if (profile.bio) bioPara.textContent = profile.bio;
+    if (profile.avatar_url) {
+      avatarImg.src = profile.avatar_url;
+      avatarImg.style.display = "block";
+    }
+  })
+  .catch(err => {
+    console.warn("Could not load profile data:", err);
+  });
+
+// Fetch projects data
 fetch("repos.json")
   .then(res => {
     if (!res.ok) throw new Error("Failed to load repos.json");
     return res.json();
   })
   .then(repos => {
+    projectsContainer.innerHTML = ""; // Clear existing content
+
     repos
       .filter(repo => !repo.fork)
       .forEach(repo => {
@@ -23,10 +48,10 @@ fetch("repos.json")
           </div>
         `;
 
-        container.appendChild(card);
+        projectsContainer.appendChild(card);
       });
   })
   .catch(err => {
     console.error(err);
-    container.innerHTML = "<p>Unable to load projects.</p>";
+    projectsContainer.innerHTML = "<p>Unable to load projects.</p>";
   });

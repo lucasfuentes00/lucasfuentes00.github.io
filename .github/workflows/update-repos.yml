@@ -19,6 +19,12 @@ jobs:
                "https://api.github.com/users/lucasfuentes00/repos?per_page=100&sort=updated" \
                > repos.json
 
+      - name: Fetch GitHub profile
+        run: |
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/users/lucasfuentes00" \
+               > profile.json
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions"
@@ -27,7 +33,7 @@ jobs:
           if git diff --quiet; then
             echo "No changes"
           else
-            git add repos.json
-            git commit -m "Auto-update repos.json"
+            git add repos.json profile.json
+            git commit -m "Auto-update GitHub data"
             git push
           fi
