@@ -3,7 +3,6 @@ import requests
 import json
 import base64
 import re
-from bs4 import BeautifulSoup
 
 # Configuration
 GITHUB_USERNAME = "lucasfuentes00"
@@ -30,7 +29,7 @@ def get_profile():
         return {}
     return response.json()
 
-def get_readme_image(repo_name):
+def get_readme_image(repo_name, default_branch="main"):
     url = f"https://api.github.com/repos/{GITHUB_USERNAME}/{repo_name}/readme"
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
@@ -45,23 +44,58 @@ def get_readme_image(repo_name):
     except Exception:
         return None
     
-    # Try to find first image in Markdown ![]()
+    # Try to find first image in Markdown ![]() or HTML <img>
     # Match both Markdown and HTML img tags
+    # Markdown: ![alt](url)
     md_img_match = re.search(r'!\[.*?\]\((.*?)\)', readme_content)
     if md_img_match:
         img_url = md_img_match.group(1)
         if not img_url.startswith("http"):
-            img_url = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{repo_name}/main/{img_url.lstrip('./')}"
+            img_url = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{repo_name}/{default_branch}/{img_url.lstrip('./')}"
         return img_url
     
-    # Try to find first <img> tag
+    # HTML: <img src="url">
     html_img_match = re.search(r'<img [^>]*src="([^"]+)"', readme_content)
     if html_img_match:
         img_url = html_img_match.group(1)
         if not img_url.startswith("http"):
-            img_url = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{repo_name}/main/{img_url.lstrip('./')}"
+            img_url = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{repo_name}/{default_branch}/{img_url.lstrip('./')}"
         return img_url
     
+    return None
+
+def find_image_in_folders(repo_name, default_branch="main"):
+    """Look for images in common folders like assets/, img/, etc."""
+    folders = ["assets", "img", "images", "screenshots"]
+    common_names = ["thumb", "cover", "screenshot", "preview", "logo"]
+    extensions = [".png", ".jpg", ".jpeg", ".gif", ".webp"]
+
+    for folder in folders:
+        url = f"https://api.github.com/repos/{GITHUB_USERNAME}/{repo_name}/contents/{folder}"
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            files = response.json()
+            # Sort to prioritize files containing common names
+            for name in common_names:
+                for file in files:
+                    if any(file["name"].lower().startswith(name) and file["name"].lower().endswith(ext) for ext in extensions):
+                        return file["download_url"]
+            
+            # If no common names found, take the first image
+            for file in files:
+                if any(file["name"].lower().endswith(ext) for ext in extensions):
+                    return file["download_url"]
+    
+    # Also check root for common names
+    url = f"https://api.github.com/repos/{GITHUB_USERNAME}/{repo_name}/contents/"
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        files = response.json()
+        for name in common_names:
+            for file in files:
+                if any(file["name"].lower().startswith(name) and file["name"].lower().endswith(ext) for ext in extensions):
+                    return file["download_url"]
+                    
     return None
 
 def main():
@@ -78,8 +112,17 @@ def main():
         if repo["fork"]:
             continue
         
-        print(f"  Processing {repo['name']}...")
-        image_url = get_readme_image(repo["name"])
+        repo_name = repo["name"]
+        default_branch = repo.get("default_branch", "main")
+        print(f"  Processing {repo_name}...")
+        
+        # 1. Try README
+        image_url = get_readme_image(repo_name, default_branch)
+        
+        # 2. Try common folders
+        if not image_url:
+            image_url = find_image_in_folders(repo_name, default_branch)
+            
         repo["image_url"] = image_url
         enriched_repos.append(repo)
         
