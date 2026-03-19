@@ -26,7 +26,7 @@ fetch("repos.json")
       
       // Sort by stars or just take the first 3
       const featured = repos
-        .filter(repo => !repo.fork)
+        .filter(repo => !repo.fork && repo.name !== "lucasfuentes00.github.io")
         .slice(0, 3);
 
       featured.forEach(repo => {

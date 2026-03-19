@@ -7,7 +7,7 @@ fetch("repos.json")
       projectsContainer.innerHTML = "";
       
       repos
-        .filter(repo => !repo.fork)
+        .filter(repo => !repo.fork && repo.name !== "lucasfuentes00.github.io")
         .forEach(repo => {
           const card = document.createElement("div");
           card.className = "card";
